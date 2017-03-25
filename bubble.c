@@ -6,11 +6,11 @@ void bubble(int a[],int n)
 	{
 		for(int j=0;j<n-1-i;j++)
 		{
-			if(a[i]>a[j])
+			if(a[j]>a[j+1])
 			{
-				tmp = a[i];
-				a[i] = a[j];
-				a[j] = tmp;
+				tmp = a[j];
+				a[j] = a[j+1];
+				a[j+1] = tmp;
 			}
 		}
 	}
@@ -26,12 +26,12 @@ void bubble1(int a[],int n)
 		flag = 0;
 		for(int j=0;j<n-1-i;j++)
 		{
-			if(a[i]>a[j])
+			if(a[j]>a[j+1])
 			{
 				flag = 1;
-				tmp = a[i];
-				a[i] = a[j];
-				a[j] = tmp;
+				tmp = a[j];
+				a[j] = a[j+1];
+				a[j+1] = tmp;
 			}
 		}
 		if(flag == 0)
@@ -39,9 +39,30 @@ void bubble1(int a[],int n)
 	}
 }
 
+//优化2
+void bubble2(int a[],int n)
+{
+	int tmp,k,flag=n-1;
+	for(int i=0;i<flag;i++)
+	{
+		k = flag;
+		flag = 0;
+		for(int j=0;j<k;j++)
+		{
+			if(a[j]>a[j+1])
+			{
+				flag = j;
+				tmp  = a[j];
+				a[j] = a[j+1];
+				a[j+1] = tmp;
+			}
+		}
+	}
+}
+
 int main()
 {
 	int arr[] = {3,5,5,7,2,8,4};
-	bubble1(arr,sizeof(arr)/sizeof(arr[0]));
+	bubble2(arr,sizeof(arr)/sizeof(arr[0]));
 	return 0;
 }
